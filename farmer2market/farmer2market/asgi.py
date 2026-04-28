@@ -9,14 +9,21 @@ https://docs.djangoproject.com/en/5.2/howto/deployment/asgi/
 
 import os
 from django.core.asgi import get_asgi_application
+
+# 1. Set the default settings module
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'farmer2market.settings')
+
+# 2. Initialize Django ASGI application early to ensure the AppRegistry
+# is populated before importing any apps/models (like api.routing)
+django_asgi_app = get_asgi_application()
+
+# 3. Now it is safe to import Channels and routing
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
 import api.routing
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'farmer2market.settings')
-
 application = ProtocolTypeRouter({
-    "http": get_asgi_application(),
+    "http": django_asgi_app,
     "websocket": AuthMiddlewareStack(
         URLRouter(
             api.routing.websocket_urlpatterns
