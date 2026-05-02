@@ -40,14 +40,28 @@ Authorization: Bearer <your_token>
 
 ## 📂 Project Structure
 ```
-farmer2market/
+## 📁 Project Structure
+
+Farmer2Market_Backend/
 │
-├── users/            # Authentication & user management
-├── products/         # Farm products logic
-├── api/              # API routes & serializers
-├── settings.py       # Project settings
-├── urls.py           # Main routing
-└── manage.py
+├── farmer2market/
+│   ├── api/                  # API app (views, serializers, models, urls)
+│   ├── farmer2market/        # Main Django project settings
+│   │   ├── __init__.py
+│   │   ├── settings.py       # Project configuration
+│   │   ├── urls.py           # Root URL configuration
+│   │   ├── asgi.py
+│   │   └── wsgi.py
+│   │
+│   ├── media/
+│   │   └── products/         # Uploaded product images/files
+│   │
+│   ├── build.sh              # Build script for deployment
+│   ├── db.sqlite3            # SQLite database (development)
+│   ├── manage.py             # Django management script
+│   └── requirements.txt      # Project dependencies
+│
+└── README.md                 # Project documentation
 ```
 
 ---
